@@ -6,7 +6,7 @@ import { RegisterService } from "../services/Register.service"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 
-export const FormRegister = ({setIsLoading}: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
+export const FormRegister = () => {
     const navigate = useNavigate()
     const [registerData, setRegisterData] = useState({
         name: "",
@@ -32,34 +32,28 @@ export const FormRegister = ({setIsLoading}: {setIsLoading: React.Dispatch<React
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault()
-        setIsLoading(true)
 
         if (!registerData.name.trim()) {
 
-            setIsLoading(false)
             return
         }
 
         if (!validateEmail(registerData.email)) {
 
-            setIsLoading(false)
             return
         }
 
         if (!validatePassword(registerData.password)) {
 
-            setIsLoading(false)
             return
         }
 
         if (registerData.password !== registerData.confirmPassword) {
 
-            setIsLoading(false)
             return
         }
 
         const token = await RegisterService(registerData.email,registerData.password,registerData.name)
-         setIsLoading(false)
         if (token.status !== 201) {
             console.error("Error al iniciar sesión:", token.data)
             toast.error("Error al iniciar sesión: " + token.response.data.message)

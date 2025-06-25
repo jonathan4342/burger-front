@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 export const FormLogin = () => {
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
@@ -38,9 +37,7 @@ export const FormLogin = () => {
             console.error("La contraseña debe tener al menos 6 caracteres")
             return
         }
-        setIsLoading(true)
         const token = await LoginService(loginData.email, loginData.password)
-        setIsLoading(false)
         if (token.status !== 201) {
             console.error("Error al iniciar sesión:", token.data)
             toast.error("Error al iniciar sesión: " + token.response.data.message)

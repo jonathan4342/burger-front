@@ -10,7 +10,7 @@ import { Fries } from "./Fries"
 import { Souces } from "./Souces"
 import { Additions } from "./Additions"
 import { BurgerInfo } from "./BurgerInfo"
-import type { MenuItem } from "../Menu"
+import type { MenuItem } from "../Menu.interface"
 
 
 interface BurgerCustomizerProps {
